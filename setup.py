@@ -11,67 +11,69 @@ import os
 
 from setuptools import find_packages, setup
 
-readme = open('README.rst').read()
-history = open('CHANGES.rst').read()
+readme = open("README.rst").read()
+history = open("CHANGES.rst").read()
 
 tests_require = [
-    'pytest-invenio>=1.4.0',
+    "pytest-mock>=1.6.0",
+    "pytest-invenio>=1.4.0",
+    "invenio-app>=1.3.1,<2.0.0",
 ]
 
 extras_require = {
-    'docs': [
-        'Sphinx>=3,<4',
+    "docs": [
+        "sphinx>=4.2.0,<5",
     ],
-    'tests': tests_require,
+    "tests": tests_require,
 }
 
-extras_require['all'] = []
-for reqs in extras_require.values():
-    extras_require['all'].extend(reqs)
+extras_require["all"] = []
+for name, reqs in extras_require.items():
+    extras_require["all"].extend(reqs)
 
 setup_requires = [
-    'Babel>=2.8',
+    "Babel>=2.8",
+    "pytest-runner>=3.0.0,<5",
 ]
 
 install_requires = [
-    'invenio-i18n>=1.2.0',
+    "invenio-i18n>=1.2.0",
 ]
-
 packages = find_packages()
 
 
 # Get the version string. Cannot be done with import!
 g = {}
-with open(os.path.join('geo_assets', 'version.py'), 'rt') as fp:
+with open(os.path.join("geo_assets", "version.py"), "rt") as fp:
     exec(fp.read(), g)
-    version = g['__version__']
+    version = g["__version__"]
 
 setup(
-    name='geo-assets',
+    name="geo-assets",
     version=version,
     description=__doc__,
-    long_description=readme + '\n\n' + history,
-    keywords='invenio TODO',
-    license='MIT',
-    author='GEO Secretariat',
-    author_email='geokhub@geosec.org',
-    url='https://github.com/geo-knowledge-hub/geo-assets',
+    long_description=readme + "\n\n" + history,
+    keywords="invenio TODO",
+    license="MIT",
+    author="GEO Secretariat",
+    author_email="geokhub@geosec.org",
+    url="https://github.com/geo-knowledge-hub/geo-assets",
     packages=packages,
     zip_safe=False,
     include_package_data=True,
-    platforms='any',
+    platforms="any",
     entry_points={
-        'invenio_base.apps': [
-            'geo_assets = geo_assets:GEOAssets',
+        "invenio_base.apps": [
+            "geo_assets = geo_assets:GEOAssets",
         ],
         "invenio_config.module": [
             "geo_assets = geo_assets.config",
         ],
-        'invenio_base.blueprints': [
-            'geo_assets = geo_assets.views:blueprint',
+        "invenio_base.blueprints": [
+            "geo_assets = geo_assets.views:blueprint",
         ],
-        'invenio_i18n.translations': [
-            'messages = geo_assets',
+        "invenio_i18n.translations": [
+            "messages = geo_assets",
         ],
         # TODO: Edit these entry points to fit your needs.
         # 'invenio_access.actions': [],
@@ -90,18 +92,18 @@ setup(
     setup_requires=setup_requires,
     tests_require=tests_require,
     classifiers=[
-        'Environment :: Web Environment',
-        'Intended Audience :: Developers',
-        'License :: OSI Approved :: MIT License',
-        'Operating System :: OS Independent',
-        'Programming Language :: Python',
-        'Topic :: Internet :: WWW/HTTP :: Dynamic Content',
-        'Topic :: Software Development :: Libraries :: Python Modules',
-        'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.6',
-        'Programming Language :: Python :: 3.7',
-        'Programming Language :: Python :: 3.8',
-        'Programming Language :: Python :: 3.9',
-        'Development Status :: 1 - Planning',
+        "Environment :: Web Environment",
+        "Intended Audience :: Developers",
+        "License :: OSI Approved :: MIT License",
+        "Operating System :: OS Independent",
+        "Programming Language :: Python",
+        "Topic :: Internet :: WWW/HTTP :: Dynamic Content",
+        "Topic :: Software Development :: Libraries :: Python Modules",
+        "Programming Language :: Python :: 3",
+        "Programming Language :: Python :: 3.6",
+        "Programming Language :: Python :: 3.7",
+        "Programming Language :: Python :: 3.8",
+        "Programming Language :: Python :: 3.9",
+        "Development Status :: 1 - Planning",
     ],
 )

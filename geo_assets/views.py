@@ -5,13 +5,13 @@
 # geo-assets is free software; you can redistribute it and/or modify it under
 # the terms of the MIT License; see LICENSE file for more details.
 
-"""GEO Knowledge Hub assets"""
+"""GEO Assets views."""
 
-from flask import Blueprint, render_template
+from flask import Blueprint
 from flask_babelex import gettext as _
 
 blueprint = Blueprint(
-    'geo_assets',
+    "geo_assets",
     __name__,
-    static_folder='static',
+    static_folder="static",
 )

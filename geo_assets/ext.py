@@ -5,7 +5,7 @@
 # geo-assets is free software; you can redistribute it and/or modify it under
 # the terms of the MIT License; see LICENSE file for more details.
 
-"""GEO Knowledge Hub assets"""
+"""GEO Assets extension definition."""
 
 from . import config
 
@@ -21,16 +21,16 @@ class GEOAssets(object):
     def init_app(self, app):
         """Flask application initialization."""
         self.init_config(app)
-        app.extensions['geo-assets'] = self
+        app.extensions["geo-assets"] = self
 
     def init_config(self, app):
         """Initialize configuration."""
         # Use theme's base template if theme is installed
-        if 'BASE_TEMPLATE' in app.config:
+        if "BASE_TEMPLATE" in app.config:
             app.config.setdefault(
-                'GEO_ASSETS_BASE_TEMPLATE',
-                app.config['BASE_TEMPLATE'],
+                "GEO_ASSETS_BASE_TEMPLATE",
+                app.config["BASE_TEMPLATE"],
             )
         for k in dir(config):
-            if k.startswith('GEO_ASSETS_'):
+            if k.startswith("GEO_ASSETS_"):
                 app.config.setdefault(k, getattr(config, k))
